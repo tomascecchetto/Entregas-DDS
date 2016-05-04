@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>Usted está en MODIFICACIONES</h1>
 	<p><a href="<s:url action='alta'/>">Ir a altas</a></p>
 	<p><a href="<s:url action='baja'/>">Ir a bajas</a></p>
 	<p><s:form action="modify">
+		<s:textfield label="ID" name="id"></s:textfield>
         <s:textfield label="Nombre" name="name"></s:textfield>
         <s:textfield label="Edad" name="age"></s:textfield>
         <s:radio label="Genero" name="gender" list="#{'Femenino':'Femenino','Masculino':'Masculino'}" />

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>Usted está en ALTAS</h1>
 	<p><a href="<s:url action='baja'/>">Ir a bajas</a></p>
 	<p><a href="<s:url action='modificacion'/>">Ir a modificaciones</a></p>
 	<p><s:form action="save">
@@ -21,7 +22,7 @@
             <th>NOMBRE</th>
             <th>EDAD</th>
             <th>GENERO</th>
-        </tr>
+        </tr> 
     <s:iterator value="personas">
         <tr>
             <td><s:property value="getID()"/></td>

@@ -7,20 +7,19 @@ import java.util.ArrayList;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PersonaAction extends ActionSupport {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
+	public long id;
 	private String name;
     private String age;
     private String gender;
     private ArrayList<Persona> personas;
-  
+    
+    
     public String execute(){
         personas = (ArrayList<Persona>) PersistentManager.getInstance();
         return SUCCESS;
-    }
-    	
+    }	
 
     public String save(){
         ArrayList<Persona> personas = (ArrayList<Persona>) PersistentManager.getInstance();
@@ -33,37 +32,29 @@ public class PersonaAction extends ActionSupport {
             addActionError("Ocurrió un error con la edad");
             return ERROR;
         }
-
-        Persona p2 = new Persona(personas.size(), name, edad, gender);
-        for (Persona p1:personas) {
-        	if (p1.getName().equals(name)) {
-        		addActionError("Persona ya existente");
-        		return ERROR;
-        	}
-        }
-        personas.add(p2);
-        System.out.println(personas.size());
         
+        Persona p2 = new Persona(PersistentManager.getContador(), name, edad, gender);
+        PersistentManager.setContador();
+        personas.add(p2);
         return SUCCESS;
     }
     
     public String baja() {
     	ArrayList<Persona> personas = (ArrayList<Persona>) PersistentManager.getInstance();
     	for (Persona p:personas) {
-    		if ((p.getName()).equals(name)) {
+    		if (p.getID()==id) {
     			personas.remove(p);
-    			System.out.println(personas.size());
     			return SUCCESS;
     		}
     	};
-    	addActionError("El nombre ingresado no existe");
+    	addActionError("El ID no existe");
     	return ERROR;
     }
     
     public String modificar() {
     	ArrayList<Persona> personas = (ArrayList<Persona>) PersistentManager.getInstance();
     	for (Persona p1:personas) {
-    		if ((p1.getName().equals(name))) {
+    		if ((p1.getID()==id)) {
     			personas.remove(p1);
     			int edad = 0;
     	        try{
@@ -73,15 +64,21 @@ public class PersonaAction extends ActionSupport {
     	            addActionError("Ocurrió un error con la edad");
     	            return ERROR;
     	        }
-    			Persona p2 = new Persona(p1.getID(), name, edad, gender);
+    			Persona p2 = new Persona(id, name, edad, gender);
     			personas.add(p2);
     			return SUCCESS;
     		}
     	}
-    	addActionError("Persona inexistente, el nombre es incorrecto");
+    	addActionError("Persona inexistente, el ID es incorrecto");
     	return ERROR;
     }
     
+    public long getID() {
+		return id;
+	}
+	public void setID(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -107,6 +104,5 @@ public class PersonaAction extends ActionSupport {
 	public void setPersonas(ArrayList<Persona> personas) {
 		this.personas = personas;
 	}
-
 }
 

@@ -8,10 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>Usted está en BAJAS</h1>
 	<p><a href="<s:url action='alta'/>">Ir a altas</a></p>
 	<p><a href="<s:url action='modificacion'/>">Ir a modificaciones</a></p>
 	<p><s:form action="delete">
-        <s:textfield label="Nombre" name="name"></s:textfield>
+        <s:textfield label="ID" name="id"></s:textfield>
         <s:submit></s:submit>
         <table>
         <tr>
