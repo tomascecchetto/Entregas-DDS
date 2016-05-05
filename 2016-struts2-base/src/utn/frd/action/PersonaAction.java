@@ -36,7 +36,11 @@ public class PersonaAction extends ActionSupport {
         Persona p2 = new Persona(PersistentManager.getContador(), name, edad, gender);
         PersistentManager.setContador();
         personas.add(p2);
+        name = null;
+        this.setAge(null);
+        gender=null;
         return SUCCESS;
+
     }
     
     public String baja() {
@@ -56,16 +60,22 @@ public class PersonaAction extends ActionSupport {
     	for (Persona p1:personas) {
     		if ((p1.getID()==id)) {
     			personas.remove(p1);
-    			int edad = 0;
+    			Integer edad = 0;
     	        try{
     	            edad = Integer.parseInt(age);
     	        }
     	        catch(Exception e){
     	            addActionError("Ocurrió un error con la edad");
+    	            name = null;
+    	            this.setAge(null);
+    	            gender=null;
     	            return ERROR;
     	        }
     			Persona p2 = new Persona(id, name, edad, gender);
     			personas.add(p2);
+    			name = null;
+    		    this.setAge(null);
+    		    gender=null;
     			return SUCCESS;
     		}
     	}
